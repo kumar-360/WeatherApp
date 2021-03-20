@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
 
-const CityWeather = ({ city, submit,setSubmit }) => {
+const CityWeather = ({ city, submit, setSubmit }) => {
   const [weather, setWeather] = useState({});
   const [error, setError] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=e587a3a75ff2c9d419e6ce32132ac4c9`
     )
@@ -15,17 +17,24 @@ const CityWeather = ({ city, submit,setSubmit }) => {
         } else return response.json();
       })
       .then((data) => {
-          //console.log(data)
+        //console.log(data)
         setWeather(data);
         setClicked(true);
-        
+        setLoading(false);
       })
-      .catch((e) => {setError(e.message);setClicked(false)});
+      .catch((e) => {
+        setError(e.message);
+        setClicked(false);
+        setLoading(false);
+      });
   }, [submit]);
   //console.log(weather.weather[0].description);
-  return  clicked === true ? (
+  return loading === true ? (
     <Container>
-    
+      <h2>Loading...</h2>
+    </Container>
+  ) : clicked === true ? (
+    <Container>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -50,9 +59,7 @@ const CityWeather = ({ city, submit,setSubmit }) => {
       </Table>
     </Container>
   ) : (
-    <Container>
-    {error}
-    </Container>
+    <Container>{error}</Container>
   );
 };
 
