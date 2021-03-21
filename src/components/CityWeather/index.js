@@ -9,7 +9,7 @@ const CityWeather = ({ city, submit, setSubmit }) => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=e587a3a75ff2c9d419e6ce32132ac4c9`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=e587a3a75ff2c9d419e6ce32132ac4c9`
     )
       .then((response) => {
         if (response.status !== 200) {
