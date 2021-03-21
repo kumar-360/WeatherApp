@@ -24,7 +24,7 @@ const CityInput = ({ city, setCity,setSubmit, submit }) => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
-          <h3 className="text-danger">{error}</h3>
+          <p className="text-danger">{error}</p>
         </Form.Group>
 
         <Button variant="primary" onClick={handleClick}>
