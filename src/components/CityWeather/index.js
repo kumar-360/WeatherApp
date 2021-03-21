@@ -59,7 +59,7 @@ const CityWeather = ({ city, submit, setSubmit }) => {
       </Table>
     </Container>
   ) : (
-    <Container>{error}</Container>
+    <Container><h2 className="text-danger">{error}</h2></Container>
   );
 };
 
